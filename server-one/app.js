@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/kokeilu', (req, res) => {
+  res.render('test');
+});
+
 app.get('/catinfo', (req, res) => {
   const cat = {
     name: 'Frank',
