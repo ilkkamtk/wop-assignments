@@ -18,6 +18,15 @@ const cats = [
   },
 ];
 
+const getCat = (catId) => {
+  for (let cat of cats) {
+    if (catId === cat.id) {
+      return cat;
+    }
+  }
+};
+
 module.exports = {
   cats,
+  getCat,
 };
