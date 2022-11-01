@@ -25,6 +25,7 @@ app.get('/catinfo', (req, res) => {
   res.json(cat);
 });
 
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
