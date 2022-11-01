@@ -297,4 +297,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,windows,webstorm,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/macos,windows,webstorm,visualstudiocod
+.idea
