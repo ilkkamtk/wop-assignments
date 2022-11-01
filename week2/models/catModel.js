@@ -19,11 +19,7 @@ const cats = [
 ];
 
 const getCat = (catId) => {
-  for (let cat of cats) {
-    if (catId === cat.id) {
-      return cat;
-    }
-  }
+  return cats.filter(cat => catId === cat.id).pop();
 };
 
 module.exports = {
