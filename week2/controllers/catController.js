@@ -7,10 +7,13 @@ const cat_list_get = async (req, res) => {
   res.json(kissat);
 };
 
-const cat_get = (req, res) => {
-  const cat = getCat(req.params.id);
-  console.log('kissa', cat);
-  res.json(cat);
+const cat_get = async (req, res) => {
+  const cat = await getCat(req.params.id);
+  if(cat.length > 0) {
+    res.json(cat.pop());
+  } else {
+    res.send('virhe');
+  }
 };
 
 const cat_post = (req, res) => {
