@@ -27,8 +27,14 @@ const cat_post = async (req, res) => {
   ];
 
   const result = await addCat(data);
-  console.log('addCat', result);
-  res.send('Cat post done.');
+  if(result.affectedRows > 0) {
+    res.json({
+      message: 'cat added',
+      cat_id: result.insertId,
+    });
+  } else {
+    res.send('virhe')
+  }
 };
 
 module.exports = {
