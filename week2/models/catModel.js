@@ -47,7 +47,7 @@ const updateCat = async (data) => {
 
 const deleteCat = async (catId) => {
   try {
-    const [rows] = await promisePool.execute(`DELETE FROM wop_cat where cat_id = ?;`, catId);
+    const [rows] = await promisePool.execute(`DELETE FROM wop_cat where cat_id = ?;`, [catId]);
     return rows;
   } catch (e) {
     console.error('error', e.message);
