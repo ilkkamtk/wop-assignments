@@ -1,7 +1,6 @@
 'use strict';
 // userController
 const {getUser, getAllUsers, addUser} = require('../models/userModel');
-const {addCat} = require('../models/catModel');
 
 const user_list_get = async (req, res) => {
   res.json(await getAllUsers());
