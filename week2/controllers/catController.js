@@ -2,13 +2,13 @@
 // catController
 const {getCat, getAllCats, addCat, updateCat, deleteCat} = require('../models/catModel');
 
-const cat_list_get = async (req, res) => {
-  const kissat = await getAllCats();
+const cat_list_get = async (req, res, next) => {
+  const kissat = await getAllCats(next);
   res.json(kissat);
 };
 
-const cat_get = async (req, res) => {
-  const cat = await getCat(req.params.id);
+const cat_get = async (req, res, next) => {
+  const cat = await getCat(req.params.id, next);
   if(cat.length > 0) {
     res.json(cat.pop());
   } else {
