@@ -13,6 +13,6 @@ router.post('/', upload.single('cat'), cat_post);
 
 router.put('/', cat_put);
 
-router.delete('/',cat_delete);
+router.delete('/:id',cat_delete);
 
 module.exports = router;
