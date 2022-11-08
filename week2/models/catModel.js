@@ -30,30 +30,33 @@ const getCat = async (catId, next) => {
   }
 };
 
-const addCat = async (data) => {
+const addCat = async (data, next) => {
   try {
     const [rows] = await promisePool.execute(`INSERT INTO wop_cat (name, birthdate, weight, owner, filename) VALUES (?, ?, ?, ?, ?);`, data);
     return rows;
   } catch (e) {
-    console.error('error', e.message);
+    console.error('addCat', e.message);
+    next(httpError('Database error', 500));
   }
 }
 
-const updateCat = async (data) => {
+const updateCat = async (data, next) => {
   try {
     const [rows] = await promisePool.execute(`UPDATE wop_cat set name = ?, birthdate = ?, weight = ?, owner = ? WHERE cat_id = ?;`, data);
     return rows;
   } catch (e) {
-    console.error('error', e.message);
+    console.error('updateCat', e.message);
+    next(httpError('Database error', 500));
   }
 }
 
-const deleteCat = async (catId) => {
+const deleteCat = async (catId, next) => {
   try {
     const [rows] = await promisePool.execute(`DELETE FROM wop_cat where cat_id = ?;`, [catId]);
     return rows;
   } catch (e) {
-    console.error('error', e.message);
+    console.error('deleteCat', e.message);
+    next(httpError('Database error', 500));
   }
 }
 
