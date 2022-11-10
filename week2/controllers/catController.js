@@ -3,6 +3,7 @@
 const {getCat, getAllCats, addCat, updateCat, deleteCat} = require(
     '../models/catModel');
 const {httpError} = require('../utils/errors');
+const {validationResult} = require('express-validator');
 
 const cat_list_get = async (req, res, next) => {
   try {
@@ -34,6 +35,17 @@ const cat_get = async (req, res, next) => {
 
 const cat_post = async (req, res, next) => {
   try {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors.
+      // Error messages can be returned in an array using `errors.array()`.
+      console.error('user_post validation', errors.array());
+      next(httpError('Invalid data', 400));
+      return;
+    }
+
     console.log('cat_post', req.body, req.file);
     const data = [
       req.body.name,
@@ -60,7 +72,17 @@ const cat_post = async (req, res, next) => {
 
 const cat_put = async (req, res, next) => {
   try {
-    console.log('cat_put', req.body);
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors.
+      // Error messages can be returned in an array using `errors.array()`.
+      console.error('user_post validation', errors.array());
+      next(httpError('Invalid data', 400));
+      return;
+    }
+
     const data = [
       req.body.name,
       req.body.birthdate,
