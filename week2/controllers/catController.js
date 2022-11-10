@@ -6,6 +6,7 @@ const {httpError} = require('../utils/errors');
 
 const cat_list_get = async (req, res, next) => {
   const kissat = await getAllCats(next);
+  console.log(kissat);
   res.json(kissat);
 };
 
