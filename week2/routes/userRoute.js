@@ -3,7 +3,6 @@ const express = require('express');
 const {user_list_get, user_get, user_post, user_put, user_delete} = require(
     '../controllers/userController');
 const {body} = require('express-validator');
-const {isEmail} = require('validator');
 const router = express.Router();
 
 router.route('/').
