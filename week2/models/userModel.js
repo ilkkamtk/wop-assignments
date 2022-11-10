@@ -34,9 +34,30 @@ const addUser = async (data, next) => {
   }
 }
 
+const updateUser = async (data, next) => {
+  try {
+    const [rows] = await promisePool.execute(`UPDATE wop_user set name = ?, email = ?, password = ? WHERE user_id = ?;`, data);
+    return rows;
+  } catch (e) {
+    console.error('updateUser', e.message);
+    next(httpError('Database error', 500));
+  }
+}
+
+const deleteUser = async (userId, next) => {
+  try {
+    const [rows] = await promisePool.execute(`DELETE FROM wop_user where user_id = ?;`, [userId]);
+    return rows;
+  } catch (e) {
+    console.error('deleteUser', e.message);
+    next(httpError('Database error', 500));
+  }
+}
 
 module.exports = {
   getAllUsers,
   getUser,
   addUser,
+  updateUser,
+  deleteUser,
 };
