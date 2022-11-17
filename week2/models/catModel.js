@@ -60,7 +60,7 @@ const deleteCat = async (catId, user, next) => {
       sql += ';';
       params.push(catId);
     } else {
-      sql = ' AND owner = ?;';
+      sql += ' AND owner = ?;';
       params.push(catId, user.user_id);
     }
     const [rows] = await promisePool.execute(sql, params);
