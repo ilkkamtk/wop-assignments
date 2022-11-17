@@ -41,11 +41,18 @@ const addCat = async (data, next) => {
   }
 };
 
-const updateCat = async (data, next) => {
+const updateCat = async (data, user, next) => {
   try {
-    const [rows] = await promisePool.execute(`UPDATE wop_cat set name = ?, birthdate = ?, weight = ?, owner = ? WHERE cat_id = ? AND owner = ?;`,
-        data);
-    return rows;
+    if(user.role === 0){
+      const [rows] = await promisePool.execute(`UPDATE wop_cat SET name = ?, birthdate = ?, weight = ?, owner = ? WHERE cat_id = ?;`,
+          data);
+      return rows;
+    } else {
+      const [rows] = await promisePool.execute(`UPDATE wop_cat SET name = ?, birthdate = ?, weight = ? WHERE cat_id = ? AND owner = ?;`,
+          data);
+      return rows;
+    }
+
   } catch (e) {
     console.error('updateCat', e.message);
     next(httpError('Database error', 500));
