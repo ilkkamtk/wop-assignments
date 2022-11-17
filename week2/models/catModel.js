@@ -57,7 +57,6 @@ const deleteCat = async (catId, user, next) => {
     let sql = 'DELETE FROM wop_cat where cat_id = ?';
     const params = [];
     if (user.role === 0) {
-      sql += ';';
       params.push(catId);
     } else {
       sql += ' AND owner = ?;';
