@@ -103,7 +103,9 @@ const cat_put = async (req, res, next) => {
       ];
     }
 
-    const result = await updateCat(data, next);
+    console.log('cat_put', data);
+
+    const result = await updateCat(data, req.user, next);
     if (result.affectedRows < 1) {
       next(httpError('No cat modified', 400));
       return;
