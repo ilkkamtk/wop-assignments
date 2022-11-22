@@ -1,6 +1,6 @@
 'use strict';
 // userController
-const {getUser, getAllUsers, addUser, deleteUser, updateUser} = require('../models/userModel');
+const {getUser, getAllUsers, deleteUser, updateUser} = require('../models/userModel');
 const {validationResult} = require('express-validator');
 const {httpError} = require('../utils/errors');
 
@@ -28,41 +28,6 @@ const user_get = async (req, res, next) => {
     res.json(user.pop());
   } catch (e) {
     console.error('user_get', e.message);
-    next(httpError('Internal server error', 500));
-  }
-};
-
-const user_post = async (req, res, next) => {
-  try {
-    // Extract the validation errors from a request.
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      // There are errors.
-      // Error messages can be returned in an array using `errors.array()`.
-      console.error('user_post validation', errors.array());
-      next(httpError('Invalid data', 400));
-      return;
-    }
-
-    const data = [
-      req.body.name,
-      req.body.email,
-      req.body.passwd,
-    ];
-
-    const result = await addUser(data, next);
-    if (result.affectedRows < 1) {
-      next(httpError('Invalid data', 400));
-      return;
-    }
-
-    res.json({
-      message: 'user added',
-      user_id: result.insertId,
-    });
-  } catch (e) {
-    console.error('user_post', e.message);
     next(httpError('Internal server error', 500));
   }
 };
@@ -120,7 +85,6 @@ const check_token = (req, res, next) => {
 module.exports = {
   user_list_get,
   user_get,
-  user_post,
   user_put,
   user_delete,
   check_token,
