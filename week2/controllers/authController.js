@@ -12,7 +12,7 @@ const login = (req, res, next) => {
     console.log('info: ', info);
     console.log('err1: ', err);
     if (err || !user) {
-      next(httpError('Kirjautumis erhe', 403));
+      next(httpError('Kirjautumiserhe', 403));
       return;
     }
     req.login(user, {session: false}, (err) => {
