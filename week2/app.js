@@ -40,7 +40,7 @@ const SmeeClient = require('smee-client')
 
 const smee = new SmeeClient({
   source: 'https://smee.io/8Ldh0eRTcXVWBXo',
-  target: 'http://localhost:3000/events',
+  target: 'http://localhost:3001/events',
   logger: console
 })
 
@@ -48,5 +48,3 @@ const events = smee.start()
 
 // Stop forwarding events
 events.close()
-//v
-//v
