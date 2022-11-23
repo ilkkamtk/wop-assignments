@@ -33,3 +33,18 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+// smee
+
+const SmeeClient = require('smee-client')
+
+const smee = new SmeeClient({
+  source: 'https://smee.io/8Ldh0eRTcXVWBXo',
+  target: 'http://localhost:3000/events',
+  logger: console
+})
+
+const events = smee.start()
+
+// Stop forwarding events
+events.close()
