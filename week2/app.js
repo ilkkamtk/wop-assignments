@@ -10,18 +10,12 @@ const passport = require('./utils/pass');
 const app = express();
 const port = 3000;
 
-app.enable('trust proxy');
-
-app.use ((req, res, next) => {
-  if (req.secure) {
-    // request was via https, so do no special handling
-    next();
-  } else {
-    const proxypath = process.env.PROXY_PASS || ''
-    // request was via http, so redirect to https
-    res.redirect(301, `https://${req.headers.host}${proxypath}${req.url}`);
-  }
-});
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+if (process.env.NODE_ENV === 'production') {
+  require('./utils/production')(app, process.env.HTTP_PORT || 3000, process.env.HTTPS_PORT || 8000);
+} else {
+  require('./utils/localhost')(app, process.env.HTTP_PORT || 3000);
+}
 
 app.use(cors());
 app.use(express.json()); // for parsing application/json
@@ -45,5 +39,3 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).
       json({message: err.message || 'Internal server error'});
 });
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
