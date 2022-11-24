@@ -22,6 +22,7 @@ const getCoordinates = (imgFile) => { // imgFile = full path to uploaded image
   });
 };
 
+
 // convert GPS coordinates to decimal format
 // for longitude, send exifData.gps.GPSLongitude, exifData.gps.GPSLongitudeRef
 // for latitude, send exifData.gps.GPSLatitude, exifData.gps.GPSLatitudeRef
