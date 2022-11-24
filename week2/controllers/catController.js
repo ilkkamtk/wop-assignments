@@ -66,6 +66,7 @@ const cat_post = async (req, res, next) => {
       JSON.stringify(coords),
     ];
 
+
     const result = await addCat(data, next);
     if (result.affectedRows < 1) {
       next(httpError('Invalid data', 400));
