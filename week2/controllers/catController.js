@@ -65,7 +65,7 @@ const cat_post = async (req, res, next) => {
       req.body.weight,
       req.user.user_id,
       req.file.filename,
-      coords,
+      JSON.stringify(coords),
     ];
 
     const result = await addCat(data, next);
