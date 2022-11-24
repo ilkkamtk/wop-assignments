@@ -55,15 +55,12 @@ const cat_post = async (req, res, next) => {
         png().
         toFile('./thumbnails/' + req.file.filename);
 
-    const coords = await getCoordinates(req.file.path);
-
     const data = [
       req.body.name,
       req.body.birthdate,
       req.body.weight,
       req.user.user_id,
       req.file.filename,
-      coords,
     ];
 
     const result = await addCat(data, next);
@@ -71,7 +68,7 @@ const cat_post = async (req, res, next) => {
       next(httpError('Invalid data', 400));
       return;
     }
-    if (thumbnail) {
+    if(thumbnail) {
       res.json({
         message: 'cat added',
         cat_id: result.insertId,
