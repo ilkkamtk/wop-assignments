@@ -32,7 +32,7 @@ const getCat = async (catId, next) => {
 
 const addCat = async (data, next) => {
   try {
-    const [rows] = await promisePool.execute(`INSERT INTO wop_cat (name, birthdate, weight, owner, filename) VALUES (?, ?, ?, ?, ?);`,
+    const [rows] = await promisePool.execute(`INSERT INTO wop_cat (name, birthdate, weight, owner, filename, coords) VALUES (?, ?, ?, ?, ?, ?);`,
         data);
     return rows;
   } catch (e) {
