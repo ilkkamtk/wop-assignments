@@ -57,6 +57,8 @@ const cat_post = async (req, res, next) => {
 
     const coords = await getCoordinates(req.file.path);
 
+    console.log('coords', coords);
+
     const data = [
       req.body.name,
       req.body.birthdate,
